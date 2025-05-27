@@ -14,13 +14,13 @@ class DetailPeriksa extends Model
         'id_obat',
     ];
 
-    // Relasi: Detail periksa belongs to periksa
+    // Relasi: Detail memeriksa.blade.php belongs to memeriksa.blade.php
     public function periksa()
     {
         return $this->belongsTo(Periksa::class, 'id_periksa');
     }
 
-    // Relasi: Detail periksa belongs to obat
+    // Relasi: Detail memeriksa.blade.php belongs to obat
     public function obat()
     {
         return $this->belongsTo(Obat::class, 'id_obat');

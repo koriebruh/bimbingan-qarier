@@ -64,13 +64,13 @@ class User extends Authenticatable
         return $query->where('role', 'pasien');
     }
 
-    // Relasi: Dokter memiliki banyak jadwal periksa
+    // Relasi: Dokter memiliki banyak jadwal memeriksa.blade.php
     public function jadwalPeriksas()
     {
         return $this->hasMany(JadwalPeriksa::class, 'id_dokter');
     }
 
-    // Relasi: Pasien memiliki banyak janji periksa
+    // Relasi: Pasien memiliki banyak janji memeriksa.blade.php
     public function janjiPeriksas()
     {
         return $this->hasMany(JanjiPeriksa::class, 'id_pasien');

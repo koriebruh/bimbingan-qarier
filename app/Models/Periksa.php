@@ -21,13 +21,13 @@ class Periksa extends Model
         'biaya_periksa' => 'integer',
     ];
 
-    // Relasi: Periksa belongs to janji periksa
+    // Relasi: Periksa belongs to janji memeriksa.blade.php
     public function janjiPeriksa()
     {
         return $this->belongsTo(JanjiPeriksa::class, 'id_janji_periksa');
     }
 
-    // Relasi: Periksa memiliki banyak detail periksa
+    // Relasi: Periksa memiliki banyak detail memeriksa.blade.php
     public function detailPeriksas()
     {
         return $this->hasMany(DetailPeriksa::class, 'id_periksa');
@@ -39,13 +39,13 @@ class Periksa extends Model
         return $this->belongsToMany(Obat::class, 'detail_periksas', 'id_periksa', 'id_obat');
     }
 
-    // Accessor untuk mendapatkan pasien melalui janji periksa
+    // Accessor untuk mendapatkan pasien melalui janji memeriksa.blade.php
     public function getPasienAttribute()
     {
         return $this->janjiPeriksa->pasien ?? null;
     }
 
-    // Accessor untuk mendapatkan dokter melalui janji periksa
+    // Accessor untuk mendapatkan dokter melalui janji memeriksa.blade.php
     public function getDokterAttribute()
     {
         return $this->janjiPeriksa->dokter ?? null;

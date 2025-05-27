@@ -15,7 +15,7 @@ class PeriksasTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $janjiPeriksas = JanjiPeriksa::take(4)->get(); // Ambil 4 janji periksa pertama
+        $janjiPeriksas = JanjiPeriksa::take(4)->get(); // Ambil 4 janji memeriksa.blade.php pertama
 
         $periksas = [
             [

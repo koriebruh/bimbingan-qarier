@@ -13,7 +13,7 @@ class DetailPeriksasTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // Data detail periksa (relasi periksa dengan obat)
+        // Data detail memeriksa.blade.php (relasi memeriksa.blade.php dengan obat)
         $detailPeriksas = [
             // Periksa ID 1 (Demam) - Paracetamol, Ibuprofen, Vitamin B
             ['id_periksa' => 1, 'id_obat' => 1], // Paracetamol

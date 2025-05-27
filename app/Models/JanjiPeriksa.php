@@ -20,39 +20,39 @@ class JanjiPeriksa extends Model
         'no_antrian' => 'integer',
     ];
 
-    // Relasi: Janji periksa belongs to pasien (user)
+    // Relasi: Janji memeriksa.blade.php belongs to pasien (user)
     public function pasien()
     {
         return $this->belongsTo(User::class, 'id_pasien');
     }
 
-    // Relasi: Janji periksa belongs to jadwal periksa
+    // Relasi: Janji memeriksa.blade.php belongs to jadwal memeriksa.blade.php
     public function jadwalPeriksa()
     {
         return $this->belongsTo(JadwalPeriksa::class, 'id_jadwal');
     }
 
-    // Relasi: Janji periksa has one periksa
+    // Relasi: Janji memeriksa.blade.php has one memeriksa.blade.php
     public function periksa()
     {
         return $this->hasOne(Periksa::class, 'id_janji_periksa');
     }
 
-    // Accessor untuk mendapatkan dokter melalui jadwal periksa
+    // Accessor untuk mendapatkan dokter melalui jadwal memeriksa.blade.php
     public function getDokterAttribute()
     {
         return $this->jadwalPeriksa->dokter ?? null;
     }
 
-    // Scope untuk mendapatkan janji periksa yang belum diperiksa
+    // Scope untuk mendapatkan janji memeriksa.blade.php yang belum diperiksa
     public function scopeBelumDiperiksa($query)
     {
-        return $query->whereDoesntHave('periksa');
+        return $query->whereDoesntHave('memeriksa.blade.php');
     }
 
-    // Scope untuk mendapatkan janji periksa yang sudah diperiksa
+    // Scope untuk mendapatkan janji memeriksa.blade.php yang sudah diperiksa
     public function scopeSudahDiperiksa($query)
     {
-        return $query->whereHas('periksa');
+        return $query->whereHas('memeriksa.blade.php');
     }
 }

@@ -19,13 +19,13 @@ class Obat extends Model
         'harga' => 'integer',
     ];
 
-    // Relasi: Obat memiliki banyak detail periksa (many-to-many dengan periksa)
+    // Relasi: Obat memiliki banyak detail memeriksa.blade.php (many-to-many dengan memeriksa.blade.php)
     public function detailPeriksas()
     {
         return $this->hasMany(DetailPeriksa::class, 'id_obat');
     }
 
-    // Relasi: Many-to-many dengan periksa melalui detail_periksas
+    // Relasi: Many-to-many dengan memeriksa.blade.php melalui detail_periksas
     public function periksas()
     {
         return $this->belongsToMany(Periksa::class, 'detail_periksas', 'id_obat', 'id_periksa');

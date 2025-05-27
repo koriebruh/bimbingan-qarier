@@ -14,6 +14,7 @@ class JadwalPeriksa extends Model
         'hari',
         'jam_mulai',
         'jam_selesai',
+        'status',
     ];
 
     protected $casts = [
@@ -21,13 +22,13 @@ class JadwalPeriksa extends Model
         'jam_selesai' => 'datetime:H:i',
     ];
 
-    // Relasi: Jadwal periksa belongs to dokter (user)
+    // Relasi: Jadwal memeriksa.blade.php belongs to dokter (user)
     public function dokter()
     {
         return $this->belongsTo(User::class, 'id_dokter');
     }
 
-    // Relasi: Jadwal periksa memiliki banyak janji periksa
+    // Relasi: Jadwal memeriksa.blade.php memiliki banyak janji memeriksa.blade.php
     public function janjiPeriksas()
     {
         return $this->hasMany(JanjiPeriksa::class, 'id_jadwal');
