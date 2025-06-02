@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dokter\ObatController;
 use App\Http\Controllers\Dokter\DokterController as DokterController;
 use App\Http\Controllers\Dokter\JadwalPeriksaController;
+use App\Http\Controllers\Pasien\JanjiPeriksaController;
 use App\Http\Controllers\Pasien\PasienController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::middleware('auth')->group(function () {
  * */
 Route::middleware(['auth', 'role:dokter', 'verified'])->prefix('dokter')->name('dokter.')->group(function () {
     Route::get('/dashboard', [DokterController::class, 'dashboardDokter'])->name('dashboard');
-    Route::get('/history-periksa', [DokterController::class, 'historyPemeriksaan'])->name('history.pemeriksaan');
+    Route::get('/history-periksa', [DokterController::class, 'historyPemeriksaan'])->name('Periksa.historyPeriksa');
 
     /*------------------
      *  JADWAL PERIKSA
@@ -56,6 +57,20 @@ Route::middleware(['auth', 'role:dokter', 'verified'])->prefix('dokter')->name('
  * */
 Route::middleware(['role:pasien', 'auth', 'verified'])->prefix('pasien')->name('pasien.')->group(function () {
     Route::get('/dashboard', [PasienController::class, 'dashboardPasien'])->name('dashboard');
+
+    /*HISTORY PERIKSA
+     * */
+    Route::get('/history-periksa', [PasienController::class, 'historyPeriksa'])->name('HistoryPeriksa.index');
+
+    /*JANJI PERIKSA
+     * */
+    Route::get('janji-periksa/', [JanjiPeriksaController::class, 'index'])->name('JanjiPeriksa.index');
+    Route::get('janji-periksa/create', [JanjiPeriksaController::class, 'create'])->name('JanjiPeriksa.create');
+    Route::post('janji-periksa/', [JanjiPeriksaController::class, 'store'])->name('JanjiPeriksa.store');
+    Route::get('janji-periksa/{janjiPeriksa}/edit', [JanjiPeriksaController::class, 'edit'])->name('JanjiPeriksa.edit');
+    Route::put('janji-periksa/{janjiPeriksa}', [JanjiPeriksaController::class, 'update'])->name('JanjiPeriksa.update');
+    Route::delete('janji-periksa/{janjiPeriksa}', [JanjiPeriksaController::class, 'destroy'])->name('JanjiPeriksa.destroy');
+
 });
 
 

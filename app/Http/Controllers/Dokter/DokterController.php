@@ -45,8 +45,14 @@ class DokterController extends Controller
             })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-        return view('dokter.historyPeriksa', compact('periksas'));
+
+//        dd($periksas);
+        return view('dokter.periksa.historyPeriksa', compact('periksas'));
     }
 
+    /*MEMERIKSA PASIEN
+     * */
 
+    /*
+     * */
 }

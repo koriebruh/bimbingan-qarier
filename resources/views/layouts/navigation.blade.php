@@ -18,18 +18,40 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @if (Auth::user()->role == 'dokter')
+                        {{--       DASHBOARD     --}}
                         <x-nav-link :href="route('dokter.dashboard')" :active="request()->routeIs('dokter.dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
+
+                        {{--      OBAT                  --}}
                         <x-nav-link :href="route('dokter.obat.index')" :active="request()->routeIs('dokter.obat.index')">
                             {{ __('Master Obat') }}
                         </x-nav-link>
+
+                        {{--          JADWAL PERIKSA              --}}
                         <x-nav-link :href="route('dokter.JadwalPeriksa.index')" :active="request()->routeIs('dokter.JadwalPeriksa.index')">
                             {{ __('Master Jadwal Periksa') }}
                         </x-nav-link>
+
+                        {{--     HISOTRY PEMERIKSAAN DOKTER   --}}
+                        <x-nav-link :href="route('dokter.Periksa.historyPeriksa')" :active="request()->routeIs('dokter.Periksa.historyPeriksa')">
+                            {{ __('Master History Periksa') }}
+                        </x-nav-link>
+
                     @elseif(Auth::user()->role == 'pasien')
+                        {{--                        --}}
                         <x-nav-link :href="route('pasien.dashboard')" :active="request()->routeIs('pasien.dashboard')">
                             {{ __('Dashboard') }}
+                        </x-nav-link>
+
+                        {{--           REQEUST PERIKSA (CREATE JanjiPeriksa)             --}}
+                        <x-nav-link :href="route('pasien.JanjiPeriksa.index')" :active="request()->routeIs('pasien.JanjiPeriksa.index')">
+                            {{ __('Buat Janji Periksa') }}
+                        </x-nav-link>
+
+                        {{--       HISTORY PERIKSA                 --}}
+                        <x-nav-link :href="route('pasien.HistoryPeriksa.index')" :active="request()->routeIs('pasien.HistoryPeriksa.index')">
+                            {{ __('History Pemeriksaan') }}
                         </x-nav-link>
                     @endif
                 </div>

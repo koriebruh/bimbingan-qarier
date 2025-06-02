@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pasien;
 
 use App\Http\Controllers\Controller;
 use App\Models\JadwalPeriksa;
+use App\Models\Periksa;
 use Illuminate\Http\Request;
 
 class PasienController extends Controller
@@ -13,4 +14,20 @@ class PasienController extends Controller
         $jadwalPeriksa = JadwalPeriksa::where('status', 'open')->get();
         return view('pasien.dashboard', ['jadwalPeriksa' => $jadwalPeriksa]);
     }
+
+
+    public function historyPeriksa()
+    {
+        $historyPeriksa = Periksa::with([
+            'janjiPeriksa.jadwalPeriksa.dokter',
+            'detailPeriksas.obat'
+        ])->whereHas('janjiPeriksa', function ($query) {
+                $query->where('id_pasien', auth()->id());
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pasien.HistoryPeriksa.index', compact('historyPeriksa'));
+    }
+
 }
