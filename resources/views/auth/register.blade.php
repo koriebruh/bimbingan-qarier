@@ -16,14 +16,35 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Alamat -->
+        <div class="mt-4">
+            <x-input-label for="alamat" :value="__('Alamat')" />
+            <x-text-input id="alamat" class="block mt-1 w-full" type="text" name="alamat" :value="old('alamat')" required autocomplete="address-line1" />
+            <x-input-error :messages="$errors->get('alamat')" class="mt-2" />
+        </div>
+
+        <!-- No KTP -->
+        <div class="mt-4">
+            <x-input-label for="no_ktp" :value="__('No KTP')" />
+            <x-text-input id="no_ktp" class="block mt-1 w-full" type="text" name="no_ktp" :value="old('no_ktp')" required autocomplete="off" />
+            <x-input-error :messages="$errors->get('no_ktp')" class="mt-2" />
+        </div>
+
+        <!-- No HP -->
+        <div class="mt-4">
+            <x-input-label for="no_hp" :value="__('No HP')" />
+            <x-text-input id="no_hp" class="block mt-1 w-full" type="tel" name="no_hp" :value="old('no_hp')" required autocomplete="tel" />
+            <x-input-error :messages="$errors->get('no_hp')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+                          type="password"
+                          name="password"
+                          required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -33,8 +54,8 @@
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+                          type="password"
+                          name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>

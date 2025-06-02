@@ -29,6 +29,17 @@ App\Models\Periksa::all();
 App\Models\DetailPeriksa::all();
 
 php artisan make:controller DokterController
-php artisan make:controller PasienController
+php artisan make:controller Dokter/DokterController
+php artisan make:controller Dokter/ObatController
+php artisan make:controller Dokter/PeriksaController
+php artisan make:controller Dokter/JadwalPeriksaController
+
+php artisan make:controller Pasien/PasienController
+
 
 php artisan migrate:refresh --seed
+
+{{ route('dashboard') }}
+
+
+php artisan route:list | grep jadwal_periksa

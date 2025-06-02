@@ -33,18 +33,25 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'alamat' => ['required', 'string', 'max:255'],
+            'no_ktp' => ['required', 'string', 'max:16', 'unique:'.User::class],
+            'no_hp' => ['required', 'string', 'max:15', 'unique:'.User::class],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'alamat' => $request->alamat,
+            'no_ktp' => $request->no_ktp,
+            'no_hp' => $request->no_hp,
             'password' => Hash::make($request->password),
+            'role'=> 'pasien',
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('pasien.dashboard', absolute: false));
     }
 }

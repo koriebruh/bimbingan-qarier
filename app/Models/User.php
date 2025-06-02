@@ -25,6 +25,7 @@ class User extends Authenticatable
         'no_ktp',
         'no_hp',
         'poli',
+        'password',
     ];
 
     /**
@@ -34,7 +35,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'no_rm',
-        'password',
         'remember_token',
     ];
 
