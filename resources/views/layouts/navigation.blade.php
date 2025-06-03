@@ -33,9 +33,14 @@
                             {{ __('Master Jadwal Periksa') }}
                         </x-nav-link>
 
+                        {{--      MEMERIKSA                  --}}
+                        <x-nav-link :href="route('dokter.Memeriksa.index')" :active="request()->routeIs('dokter.Memeriksa.index')">
+                            {{ __('Memeriksa') }}
+                        </x-nav-link>
+
                         {{--     HISOTRY PEMERIKSAAN DOKTER   --}}
-                        <x-nav-link :href="route('dokter.Periksa.historyPeriksa')" :active="request()->routeIs('dokter.Periksa.historyPeriksa')">
-                            {{ __('Master History Periksa') }}
+                        <x-nav-link :href="route('dokter.HistoryPeriksa.index')" :active="request()->routeIs('dokter.HistoryPeriksa.index')">
+                            {{ __('History Pemeriksaan Dokter') }}
                         </x-nav-link>
 
                     @elseif(Auth::user()->role == 'pasien')

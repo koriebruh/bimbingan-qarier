@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Dokter\MemeriksaController;
 use App\Http\Controllers\Dokter\ObatController;
 use App\Http\Controllers\Dokter\DokterController as DokterController;
 use App\Http\Controllers\Dokter\JadwalPeriksaController;
 use App\Http\Controllers\Pasien\JanjiPeriksaController;
 use App\Http\Controllers\Pasien\PasienController;
 use App\Http\Controllers\ProfileController;
+use App\Models\JanjiPeriksa;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,7 +28,10 @@ Route::middleware('auth')->group(function () {
  * */
 Route::middleware(['auth', 'role:dokter', 'verified'])->prefix('dokter')->name('dokter.')->group(function () {
     Route::get('/dashboard', [DokterController::class, 'dashboardDokter'])->name('dashboard');
-    Route::get('/history-periksa', [DokterController::class, 'historyPemeriksaan'])->name('Periksa.historyPeriksa');
+
+    /* HISTORY PEMERIKSAAN YANG TELAH DI LAKUKAN DOKTER
+     * */
+    Route::get('/history-periksa', [DokterController::class, 'historyPeriksa'])->name('HistoryPeriksa.index');
 
     /*------------------
      *  JADWAL PERIKSA
@@ -50,6 +55,19 @@ Route::middleware(['auth', 'role:dokter', 'verified'])->prefix('dokter')->name('
     Route::get('obat/{id}/edit', [ObatController::class, 'edit'])->name('obat.edit');
     Route::patch('obat/{id}', [ObatController::class, 'update'])->name('obat.update');
     Route::delete('obat/{id}', [ObatController::class, 'destroy'])->name('obat.destroy');
+
+    /* -----------------
+     * MEMERIKSA PASIEN
+     * -----------------
+     * */
+    Route::get('memeriksa/', [MemeriksaController::class, 'index'])->name('Memeriksa.index');
+    Route::delete('memeriksa/{id}', [MemeriksaController::class, 'destroy'])->name('Memeriksa.destroy');
+    Route::get('memeriksa/{id}/create', [MemeriksaController::class, 'create'])->name('Memeriksa.create');
+    Route::post('memeriksa/{janjiPeriksaId}', [MemeriksaController::class, 'store'])->name('Memeriksa.store');
+
+
+
+
 });
 
 

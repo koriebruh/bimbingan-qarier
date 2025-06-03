@@ -34,6 +34,8 @@ php artisan make:controller Dokter/ObatController
 php artisan make:controller Dokter/PeriksaController
 php artisan make:controller Dokter/JadwalPeriksaController
 
+php artisan make:controller Dokter/MemeriksaController
+
 php artisan make:controller Pasien/PeriksaController
 
 php artisan make:controller Pasien/JanjiPeriksaController

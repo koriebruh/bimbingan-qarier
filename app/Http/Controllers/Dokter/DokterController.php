@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JadwalPeriksa;
 use App\Models\JanjiPeriksa;
 use App\Models\Obat;
+use App\Models\Periksa;
 use Illuminate\Http\Request;
 
 class DokterController extends Controller
@@ -36,18 +37,19 @@ class DokterController extends Controller
             , 'totalBelumDiperiksa', 'totalObats'));
     }
 
-    public function historyPemeriksaan()
+    public function historyPeriksa()
     {
-        $id_dokter = auth()->user()->id;
-        $periksas = JanjiPeriksa::with(['jadwalPeriksa', 'periksa'])
-            ->whereHas('jadwalPeriksa', function ($query) use ($id_dokter) {
-                $query->where('id_dokter', $id_dokter);
-            })
+        $historyPeriksa = Periksa::with([
+            'janjiPeriksa.jadwalPeriksa.dokter',
+            'janjiPeriksa.pasien',
+            'detailPeriksas.obat'
+        ])->whereHas('janjiPeriksa.jadwalPeriksa', function ($query) {
+            $query->where('id_dokter', auth()->id());
+        })
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->get();
 
-//        dd($periksas);
-        return view('dokter.periksa.historyPeriksa', compact('periksas'));
+        return view('dokter.HistoryPeriksa.index', compact('historyPeriksa'));
     }
 
     /*MEMERIKSA PASIEN
