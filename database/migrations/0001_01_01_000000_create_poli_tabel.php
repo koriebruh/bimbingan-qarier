@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('obats', function (Blueprint $table) {
+        Schema::create('poli', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_obat');
-            $table->string('kemasan');
-            $table->integer('harga');
-            $table->SoftDeletes(); // This will add a deleted_at column for soft deletes
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('obats');
+        Schema::dropIfExists('poli');
     }
 };

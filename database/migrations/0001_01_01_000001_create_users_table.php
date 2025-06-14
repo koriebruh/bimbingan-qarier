@@ -25,8 +25,7 @@ return new class extends Migration {
             $table->string('no_ktp');
             $table->string('no_hp');
             $table->string('no_rm')->nullable();
-            $table->string('poli')->nullable();
-
+            $table->foreignId('poli_id')->nullable()->constrained('poli')->onDelete('set null');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

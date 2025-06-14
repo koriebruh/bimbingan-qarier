@@ -24,7 +24,7 @@ class User extends Authenticatable
         'alamat',
         'no_ktp',
         'no_hp',
-        'poli',
+        'poli_id',
         'password',
     ];
 
@@ -110,5 +110,10 @@ class User extends Authenticatable
 
             $user->save();
         });
+    }
+
+    public function poli()
+    {
+        return $this->belongsTo(Poli::class, 'poli_id');
     }
 }

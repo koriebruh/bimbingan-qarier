@@ -41,6 +41,24 @@
             <x-input-error class="mt-2" :messages="$errors->get('no_hp')" />
         </div>
 
+
+        @if ($user->role == 'dokter')
+            <div>
+                <x-input-label for="poli_id" :value="__('Poli')" />
+                <select id="poli_id" name="poli_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50">
+                    <option value="">-- Pilih Poli --</option>
+                    @foreach ($polis as $poli)
+                        <option value="{{ $poli->id }}" {{ old('poli_id', $user->poli_id) == $poli->id ? 'selected' : '' }}>
+                            {{ $poli->name }}
+                        </option>
+                    @endforeach
+                </select>
+                <x-input-error class="mt-2" :messages="$errors->get('poli_id')" />
+            </div>
+        @endif
+
+
+
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />

@@ -37,36 +37,43 @@ Route::middleware(['auth', 'role:dokter', 'verified'])->prefix('dokter')->name('
      *  JADWAL PERIKSA
      * -----------------
      * */
-    Route::get('jadwal-periksa', [JadwalPeriksaController::class, 'index'])->name('JadwalPeriksa.index');
-    Route::get('jadwal-periksa/create', [JadwalPeriksaController::class, 'create'])->name('JadwalPeriksa.create');
-    Route::post('jadwal-periksa/', [JadwalPeriksaController::class, 'store'])->name('JadwalPeriksa.store');
-    Route::get('jadwal-periksa/{id}/edit', [JadwalPeriksaController::class, 'edit'])->name('JadwalPeriksa.edit');
-    Route::put('jadwal-periksa/{id}', [JadwalPeriksaController::class, 'update'])->name('JadwalPeriksa.update');
-    Route::delete('jadwal-periksa/{id}', [JadwalPeriksaController::class, 'delete'])->name('JadwalPeriksa.delete');
-    Route::patch('jadwal-periksa/{id}/toggle-status', [JadwalPeriksaController::class, 'toggleStatus'])->name('JadwalPeriksa.toggleStatus');
+    Route::prefix('jadwal-periksa')->name('JadwalPeriksa.')->group(function () {
+        Route::get('/', [JadwalPeriksaController::class, 'index'])->name('index');
+        Route::get('/create', [JadwalPeriksaController::class, 'create'])->name('create');
+        Route::post('/', [JadwalPeriksaController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [JadwalPeriksaController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [JadwalPeriksaController::class, 'update'])->name('update');
+        Route::delete('/{id}', [JadwalPeriksaController::class, 'delete'])->name('delete');
+        Route::patch('/{id}/toggle-status', [JadwalPeriksaController::class, 'toggleStatus'])->name('toggleStatus');
+    });
 
     /*-----------------
      * OBAT ROUTE
      *-----------------
      * */
-    Route::get('obat/', [ObatController::class, 'index'])->name('obat.index');
-    Route::get('obat/create', [ObatController::class, 'create'])->name('obat.create');
-    Route::post('obat/', [ObatController::class, 'store'])->name('obat.store');
-    Route::get('obat/{id}/edit', [ObatController::class, 'edit'])->name('obat.edit');
-    Route::patch('obat/{id}', [ObatController::class, 'update'])->name('obat.update');
-    Route::delete('obat/{id}', [ObatController::class, 'destroy'])->name('obat.destroy');
+    Route::prefix('obat')->name('obat.')->group(function () {
+        Route::get('/', [ObatController::class, 'index'])->name('index');
+        Route::get('/create', [ObatController::class, 'create'])->name('create');
+        Route::post('/', [ObatController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [ObatController::class, 'edit'])->name('edit');
+        Route::patch('/{id}', [ObatController::class, 'update'])->name('update');
+        Route::delete('/{id}', [ObatController::class, 'destroy'])->name('destroy');
 
+        Route::get('/restore', [ObatController::class, 'recycle'])->name('recycle');  //
+        Route::get('/restore/{id}', [ObatController::class, 'restore'])->name('restore'); //
+
+
+    });
     /* -----------------
      * MEMERIKSA PASIEN
      * -----------------
      * */
-    Route::get('memeriksa/', [MemeriksaController::class, 'index'])->name('Memeriksa.index');
-    Route::delete('memeriksa/{id}', [MemeriksaController::class, 'destroy'])->name('Memeriksa.destroy');
-    Route::get('memeriksa/{id}/create', [MemeriksaController::class, 'create'])->name('Memeriksa.create');
-    Route::post('memeriksa/{janjiPeriksaId}', [MemeriksaController::class, 'store'])->name('Memeriksa.store');
-
-
-
+    Route::prefix('memeriksa')->name('Memeriksa.')->group(function () {
+        Route::get('/', [MemeriksaController::class, 'index'])->name('index');
+        Route::delete('/{id}', [MemeriksaController::class, 'destroy'])->name('destroy');
+        Route::get('/{id}/create', [MemeriksaController::class, 'create'])->name('create');
+        Route::post('/{janjiPeriksaId}', [MemeriksaController::class, 'store'])->name('store');
+    });
 
 });
 
@@ -82,13 +89,14 @@ Route::middleware(['role:pasien', 'auth', 'verified'])->prefix('pasien')->name('
 
     /*JANJI PERIKSA
      * */
-    Route::get('janji-periksa/', [JanjiPeriksaController::class, 'index'])->name('JanjiPeriksa.index');
-    Route::get('janji-periksa/create', [JanjiPeriksaController::class, 'create'])->name('JanjiPeriksa.create');
-    Route::post('janji-periksa/', [JanjiPeriksaController::class, 'store'])->name('JanjiPeriksa.store');
-    Route::get('janji-periksa/{janjiPeriksa}/edit', [JanjiPeriksaController::class, 'edit'])->name('JanjiPeriksa.edit');
-    Route::put('janji-periksa/{janjiPeriksa}', [JanjiPeriksaController::class, 'update'])->name('JanjiPeriksa.update');
-    Route::delete('janji-periksa/{janjiPeriksa}', [JanjiPeriksaController::class, 'destroy'])->name('JanjiPeriksa.destroy');
-
+    Route::prefix('janji-periksa')->name('JanjiPeriksa.')->group(function () {
+        Route::get('/', [JanjiPeriksaController::class, 'index'])->name('index');
+        Route::get('/create', [JanjiPeriksaController::class, 'create'])->name('create');
+        Route::post('/', [JanjiPeriksaController::class, 'store'])->name('store');
+        Route::get('/{janjiPeriksa}/edit', [JanjiPeriksaController::class, 'edit'])->name('edit');
+        Route::put('/{janjiPeriksa}', [JanjiPeriksaController::class, 'update'])->name('update');
+        Route::delete('/{janjiPeriksa}', [JanjiPeriksaController::class, 'destroy'])->name('destroy');
+    });
 });
 
 

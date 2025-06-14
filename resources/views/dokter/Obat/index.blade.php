@@ -13,24 +13,32 @@
                         <h2 class="text-lg font-medium text-gray-900">
                             {{ __('Daftar Obat') }}
                         </h2>
-                        <div class="flex-col items-center justify-center text-center">
+                        <div class="flex flex-row items-center justify-center space-x-4 text-center">
+                            <!-- Tambah Obat -->
                             <a href="{{ route('dokter.obat.create') }}"
                                class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Tambah Obat
                             </a>
 
-                            @if (session('status') === 'obat-created')
-                                <p
-                                    x-data="{ show: true }"
-                                    x-show="show"
-                                    x-transition
-                                    x-init="setTimeout(() => show = false, 2000)"
-                                    class="text-sm text-green-600 mt-2"
-                                >
-                                    {{ __('Created.') }}
-                                </p>
-                            @endif
+                            <!-- Restore Obat -->
+                            <a href="{{ route('dokter.obat.recycle') }}"
+                               class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                Restore Obat
+                            </a>
                         </div>
+
+                        <!-- Optional: Status Message -->
+                        @if (session('status') === 'obat-created')
+                            <p
+                                x-data="{ show: true }"
+                                x-show="show"
+                                x-transition
+                                x-init="setTimeout(() => show = false, 2000)"
+                                class="text-sm text-green-600 mt-2 text-center"
+                            >
+                                {{ __('Created.') }}
+                            </p>
+                        @endif
                     </header>
 
                     <div class="mt-6 overflow-x-auto">
