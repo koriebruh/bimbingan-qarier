@@ -5,6 +5,7 @@ use App\Http\Controllers\Dokter\MemeriksaController;
 use App\Http\Controllers\Dokter\ObatController;
 use App\Http\Controllers\Dokter\DokterController as DokterController;
 use App\Http\Controllers\Dokter\JadwalPeriksaController;
+use App\Http\Controllers\Pasien\ChatPasienController;
 use App\Http\Controllers\Pasien\JanjiPeriksaController;
 use App\Http\Controllers\Pasien\PasienController;
 use App\Http\Controllers\ProfileController;
@@ -113,6 +114,21 @@ Route::middleware(['role:pasien', 'auth', 'verified'])->prefix('pasien')->name('
         Route::put('/{janjiPeriksa}', [JanjiPeriksaController::class, 'update'])->name('update');
         Route::delete('/{janjiPeriksa}', [JanjiPeriksaController::class, 'destroy'])->name('destroy');
     });
+
+    /*--------------------
+    *  CHAT DOKTER
+   * --------------------
+   * */
+
+    Route::prefix('chat')->name('Chat.')->group(function () {
+        Route::get('/', [ChatPasienController::class, 'index'])->name('index'); // BERANDA NEMAPILKAN NAMA ORH YG CHAT
+        Route::get('/chatDetail/{id_pasien}', [ChatPasienController::class, 'chatDetail'])->name('detail');
+        Route::post('/chatDetail', [ChatPasienController::class, 'store'])->name('store');
+        Route::put('/chatDetail/update/{id}', [ChatPasienController::class, 'update'])->name('update');
+        Route::delete('/chatDetail/{id}', [ChatPasienController::class, 'destroy'])->name('destroy');
+    });
+
+
 });
 
 

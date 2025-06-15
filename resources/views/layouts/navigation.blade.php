@@ -59,6 +59,11 @@
                             {{ __('Buat Janji Periksa') }}
                         </x-nav-link>
 
+                        {{--      CHAT PASIEN KE DOKTER                  --}}
+                        <x-nav-link :href="route('pasien.Chat.index')" :active="request()->routeIs('pasien.Chat.index')">
+                            {{ __('Hubungi Dokter') }}
+                        </x-nav-link>
+
                         {{--       HISTORY PERIKSA                 --}}
                         <x-nav-link :href="route('pasien.HistoryPeriksa.index')" :active="request()->routeIs('pasien.HistoryPeriksa.index')">
                             {{ __('History Pemeriksaan') }}
