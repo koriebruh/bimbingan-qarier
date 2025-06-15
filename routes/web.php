@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dokter\ChatDokterController;
 use App\Http\Controllers\Dokter\MemeriksaController;
 use App\Http\Controllers\Dokter\ObatController;
 use App\Http\Controllers\Dokter\DokterController as DokterController;
@@ -74,6 +75,21 @@ Route::middleware(['auth', 'role:dokter', 'verified'])->prefix('dokter')->name('
         Route::get('/{id}/create', [MemeriksaController::class, 'create'])->name('create');
         Route::post('/{janjiPeriksaId}', [MemeriksaController::class, 'store'])->name('store');
     });
+
+
+    /*--------------------
+     *  CHAT DOKTER
+    * --------------------
+    * */
+
+    Route::prefix('chat')->name('Chat.')->group(function () {
+        Route::get('/', [ChatDokterController::class, 'index'])->name('index'); // BERANDA NEMAPILKAN NAMA ORH YG CHAT
+        Route::get('/chatDetail/{id_pasien}', [ChatDokterController::class, 'chatDetail'])->name('detail');
+        Route::post('/chatDetail', [ChatDokterController::class, 'store'])->name('store');
+        Route::put('/chatDetail/update/{id}', [ChatDokterController::class, 'update'])->name('update');
+        Route::delete('/chatDetail/{id}', [ChatDokterController::class, 'destroy'])->name('destroy');
+    });
+
 
 });
 

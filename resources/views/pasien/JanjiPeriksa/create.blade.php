@@ -33,7 +33,7 @@
                                 <option value="">-- Pilih Jadwal Dokter --</option>
                                 @foreach($jadwalPeriksa as $jadwal)
                                     <option value="{{ $jadwal->id }}" {{ old('id_jadwal') == $jadwal->id ? 'selected' : '' }}>
-                                        Dr. {{ $jadwal->dokter->name }} - {{ $jadwal->dokter->poli }}
+                                        Dr. {{ $jadwal->dokter->name }} - {{ optional($jadwal->dokter->poli)->name ?? 'Poli Unknown' }}
                                         ({{ $jadwal->hari }}, {{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }})
                                     </option>
                                 @endforeach

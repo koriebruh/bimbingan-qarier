@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             JanjiPeriksasTableSeeder::class,
             PeriksasTableSeeder::class,
             DetailPeriksasTableSeeder::class,
+            ChatsTableSeeder::class
         ]);
     }
 }

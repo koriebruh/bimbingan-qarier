@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
                 'alamat' => 'Jl. Sudirman No. 123, Jakarta',
                 'no_ktp' => '3171234567890001',
                 'no_hp' => '081234567890',
-                'poli_id' => null,
+                'poli_id' => 4,
             ],
             [
                 'role' => 'dokter',
@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder
                 'alamat' => 'Jl. Gatot Subroto No. 789, Jakarta',
                 'no_ktp' => '3171234567890003',
                 'no_hp' => '081234567892',
-                'poli_id' => null,
+                'poli_id' => 2,
             ],
             [
                 'role' => 'dokter',

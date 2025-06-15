@@ -74,7 +74,9 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm font-medium text-gray-900">{{ $janji->jadwalPeriksa->dokter->name }}</div>
-                                            <div class="text-sm text-gray-500">{{ $janji->jadwalPeriksa->dokter->poli }}</div>
+                                            <div class="text-sm text-gray-500">
+                                                {{ optional(optional($janji->jadwalPeriksa)->dokter)->poli->name ?? 'Poli Unknown' }}
+                                            </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">{{ $janji->jadwalPeriksa->hari }}</div>

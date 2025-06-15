@@ -38,6 +38,11 @@
                             {{ __('Memeriksa') }}
                         </x-nav-link>
 
+                        {{--      CHAT DOKTER                  --}}
+                        <x-nav-link :href="route('dokter.Chat.index')" :active="request()->routeIs('dokter.Chat.index')">
+                            {{ __('Chats') }}
+                        </x-nav-link>
+
                         {{--     HISOTRY PEMERIKSAAN DOKTER   --}}
                         <x-nav-link :href="route('dokter.HistoryPeriksa.index')" :active="request()->routeIs('dokter.HistoryPeriksa.index')">
                             {{ __('History Pemeriksaan Dokter') }}
