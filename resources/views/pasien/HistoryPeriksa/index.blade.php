@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-200 leading-tight">
             {{ __('Riwayat Pemeriksaan') }}
         </h2>
     </x-slot>
@@ -90,7 +90,7 @@
                                                 {{ $periksa->janjiPeriksa->jadwalPeriksa->dokter->name }}
                                             </div>
                                             <div class="text-sm text-gray-500">
-                                                {{ $periksa->janjiPeriksa->jadwalPeriksa->dokter->poli }}
+                                                {{ $periksa->janjiPeriksa->jadwalPeriksa->dokter->poli->name }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4">
@@ -175,7 +175,7 @@
                 tanggal: '{{ \Carbon\Carbon::parse($periksa->tgl_periksa)->format('d M Y') }}',
                 waktu: '{{ \Carbon\Carbon::parse($periksa->tgl_periksa)->format('H:i') }} WIB',
                 dokter: '{{ $periksa->janjiPeriksa->jadwalPeriksa->dokter->name }}',
-                poli: '{{ $periksa->janjiPeriksa->jadwalPeriksa->dokter->poli }}',
+                poli: '{{ $periksa->janjiPeriksa->jadwalPeriksa->dokter->poli->name }}',
                 noAntrian: '{{ $periksa->janjiPeriksa->no_antrian }}',
                 jadwal: '{{ $periksa->janjiPeriksa->jadwalPeriksa->hari }}, {{ $periksa->janjiPeriksa->jadwalPeriksa->jam_mulai }} - {{ $periksa->janjiPeriksa->jadwalPeriksa->jam_selesai }}',
                 keluhan: `{{ $periksa->janjiPeriksa->keluhan }}`,

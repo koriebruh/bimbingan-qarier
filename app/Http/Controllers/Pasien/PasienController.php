@@ -20,7 +20,10 @@ class PasienController extends Controller
     {
         $historyPeriksa = Periksa::with([
             'janjiPeriksa.jadwalPeriksa.dokter',
-            'detailPeriksas.obat'
+            'detailPeriksas.obat' => function ($query) {
+                // Jika menggunakan soft delete, tambahkan withTrashed()
+                $query->withTrashed();
+            }
         ])->whereHas('janjiPeriksa', function ($query) {
                 $query->where('id_pasien', auth()->id());
             })

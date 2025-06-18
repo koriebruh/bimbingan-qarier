@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-200 leading-tight">
             {{ __('History Pemeriksaan') }}
         </h2>
     </x-slot>
@@ -81,23 +81,23 @@
                             </div>
                         </div>
 
-                        <!-- Filter Section -->
-                        <div class="mb-6 bg-gray-50 p-4 rounded-lg">
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Dari</label>
-                                    <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Sampai</label>
-                                    <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cari Pasien</label>
-                                    <input type="text" placeholder="Nama pasien..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                </div>
-                            </div>
-                        </div>
+{{--                        <!-- Filter Section -->--}}
+{{--                        <div class="mb-6 bg-gray-50 p-4 rounded-lg">--}}
+{{--                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">--}}
+{{--                                <div>--}}
+{{--                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Dari</label>--}}
+{{--                                    <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">--}}
+{{--                                </div>--}}
+{{--                                <div>--}}
+{{--                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Sampai</label>--}}
+{{--                                    <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">--}}
+{{--                                </div>--}}
+{{--                                <div>--}}
+{{--                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cari Pasien</label>--}}
+{{--                                    <input type="text" placeholder="Nama pasien..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <!-- Table -->
                         <div class="overflow-x-auto bg-white rounded-lg shadow">
@@ -206,23 +206,23 @@
                             </table>
                         </div>
 
-                        <!-- Pagination (if needed) -->
-                        <div class="mt-6 flex items-center justify-between">
-                            <div class="text-sm text-gray-700">
-                                Menampilkan <span class="font-medium">1</span> sampai <span class="font-medium">{{ $historyPeriksa->count() }}</span> dari <span class="font-medium">{{ $historyPeriksa->count() }}</span> hasil
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                    Sebelumnya
-                                </button>
-                                <button class="px-3 py-2 text-sm border border-gray-300 rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                                    1
-                                </button>
-                                <button class="px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                    Selanjutnya
-                                </button>
-                            </div>
-                        </div>
+{{--                        <!-- Pagination (if needed) -->--}}
+{{--                        <div class="mt-6 flex items-center justify-between">--}}
+{{--                            <div class="text-sm text-gray-700">--}}
+{{--                                Menampilkan <span class="font-medium">1</span> sampai <span class="font-medium">{{ $historyPeriksa->count() }}</span> dari <span class="font-medium">{{ $historyPeriksa->count() }}</span> hasil--}}
+{{--                            </div>--}}
+{{--                            <div class="flex space-x-2">--}}
+{{--                                <button class="px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">--}}
+{{--                                    Sebelumnya--}}
+{{--                                </button>--}}
+{{--                                <button class="px-3 py-2 text-sm border border-gray-300 rounded-md text-white bg-blue-600 hover:bg-blue-700">--}}
+{{--                                    1--}}
+{{--                                </button>--}}
+{{--                                <button class="px-3 py-2 text-sm border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">--}}
+{{--                                    Selanjutnya--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                     @else
                         <!-- Empty State -->

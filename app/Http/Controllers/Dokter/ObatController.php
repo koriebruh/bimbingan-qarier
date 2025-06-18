@@ -23,7 +23,8 @@ class ObatController extends Controller
 
     public function edit($id)
     {
-        $obat = Obat::find($id);
+//        $obat = Obat::find($id); karena ada softdelete
+        $obat = Obat::withTrashed()->findOrFail($id);
         return view('dokter.obat.edit')->with([
             'obat' => $obat,
         ]);
@@ -54,7 +55,8 @@ class ObatController extends Controller
             'harga'     => 'required|numeric|min:0',
         ]);
 
-        $obat = Obat::find($id);
+        $obat = Obat::withTrashed()->findOrFail($id);
+
         $obat->update([
             'nama_obat' => $request->nama_obat,
             'kemasan'   => $request->kemasan,

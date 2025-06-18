@@ -42,19 +42,18 @@ class DokterController extends Controller
         $historyPeriksa = Periksa::with([
             'janjiPeriksa.jadwalPeriksa.dokter',
             'janjiPeriksa.pasien',
-            'detailPeriksas.obat'
+            'detailPeriksas.obat' => function ($query) {
+                // Jika menggunakan soft delete, tambahkan withTrashed()
+                $query->withTrashed();
+            }
         ])->whereHas('janjiPeriksa.jadwalPeriksa', function ($query) {
             $query->where('id_dokter', auth()->id());
         })
             ->orderBy('created_at', 'desc')
             ->get();
 
+//        dd($historyPeriksa);
+
         return view('dokter.HistoryPeriksa.index', compact('historyPeriksa'));
     }
-
-    /*MEMERIKSA PASIEN
-     * */
-
-    /*
-     * */
 }

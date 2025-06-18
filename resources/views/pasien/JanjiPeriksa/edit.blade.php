@@ -26,7 +26,7 @@
                             <div class="ml-3">
                                 <h4 class="text-sm font-medium text-gray-900">Janji Periksa Saat Ini</h4>
                                 <p class="text-sm text-gray-600">
-                                    Dr. {{ $janjiPeriksa->jadwalPeriksa->dokter->name }} - {{ $janjiPeriksa->jadwalPeriksa->dokter->poli }}
+                                    Dr. {{ $janjiPeriksa->jadwalPeriksa->dokter->name }} - {{ $janjiPeriksa->jadwalPeriksa->dokter->poli->nama }}
                                 </p>
                                 <p class="text-sm text-gray-600">
                                     {{ $janjiPeriksa->jadwalPeriksa->hari }}, {{ $janjiPeriksa->jadwalPeriksa->jam_mulai }} - {{ $janjiPeriksa->jadwalPeriksa->jam_selesai }}
@@ -58,7 +58,7 @@
                                 @foreach($jadwalPeriksa as $jadwal)
                                     <option value="{{ $jadwal->id }}"
                                         {{ (old('id_jadwal', $janjiPeriksa->id_jadwal) == $jadwal->id) ? 'selected' : '' }}>
-                                        Dr. {{ $jadwal->dokter->name }} - {{ $jadwal->dokter->poli }}
+                                        Dr. {{ $jadwal->dokter->name }} - {{ $jadwal->dokter->poli->nama }}
                                         ({{ $jadwal->hari }}, {{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }})
                                     </option>
                                 @endforeach

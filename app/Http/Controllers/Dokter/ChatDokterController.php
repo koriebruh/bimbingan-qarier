@@ -26,6 +26,7 @@ class ChatDokterController extends Controller
 
         return view('dokter.Chat.index', compact('daftarChat'));
     }
+    
 
     // MENAMPILKAN CHAT DOKTER KE PASIEN or sebalik nya
     public function chatDetail($id_pasien)
