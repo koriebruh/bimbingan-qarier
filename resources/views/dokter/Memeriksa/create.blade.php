@@ -88,7 +88,8 @@
                                                    name="obat[]"
                                                    type="checkbox"
                                                    value="{{ $obat->id }}"
-                                                   class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                                   data-harga="{{ $obat->harga }}"
+                                                   class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded obat-checkbox"
                                                 {{ in_array($obat->id, old('obat', [])) ? 'checked' : '' }}>
                                             <label for="obat_{{ $obat->id }}" class="ml-3 block text-sm font-medium text-gray-700 cursor-pointer">
                                                 {{ $obat->nama_obat }}
@@ -113,7 +114,7 @@
                             <x-input-error :messages="$errors->get('obat.*')" class="mt-2" />
                         </div>
 
-                        <!-- Informasi Biaya -->
+                        <!-- Informasi Biaya dengan Kalkulasi Real-time -->
                         <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-md">
                             <div class="flex">
                                 <div class="flex-shrink-0">
@@ -121,12 +122,28 @@
                                         <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <div class="ml-3">
+                                <div class="ml-3 w-full">
                                     <h3 class="text-sm font-medium text-blue-800">Informasi Biaya</h3>
-                                    <div class="mt-2 text-sm text-blue-700">
-                                        <p>• Biaya konsultasi dokter: <strong>Rp 150.000</strong></p>
-                                        <p>• Biaya obat akan ditambahkan sesuai obat yang dipilih</p>
-                                        <p>• Total biaya akan dihitung otomatis</p>
+                                    <div class="mt-2 text-sm text-blue-700 space-y-1">
+                                        <div class="flex justify-between">
+                                            <span>Biaya konsultasi dokter:</span>
+                                            <strong>Rp 150.000</strong>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Biaya obat:</span>
+                                            <strong id="biaya-obat">Rp 0</strong>
+                                        </div>
+                                        <hr class="border-blue-300 my-2">
+                                        <div class="flex justify-between text-base font-semibold">
+                                            <span>Total biaya:</span>
+                                            <strong id="total-biaya" class="text-blue-900">Rp 150.000</strong>
+                                        </div>
+                                    </div>
+                                    <div id="obat-terpilih" class="mt-3 text-xs text-blue-600">
+                                        <p class="font-medium mb-1">Obat yang dipilih:</p>
+                                        <ul id="list-obat-terpilih" class="list-disc list-inside space-y-1">
+                                            <li class="text-gray-500 italic">Belum ada obat yang dipilih</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -151,19 +168,107 @@
         </div>
     </div>
 
-    <!-- JavaScript untuk kalkulasi biaya real-time (opsional) -->
+    <!-- JavaScript untuk kalkulasi biaya real-time -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('input[name="obat[]"]');
+            const checkboxes = document.querySelectorAll('.obat-checkbox');
             const biayaKonsultasi = 150000;
 
-            // Opsional: Tambahkan preview biaya real-time
+            // Object untuk menyimpan data obat
+            const obatData = {};
+
+            // Inisialisasi data obat dari checkbox
+            checkboxes.forEach(checkbox => {
+                const label = document.querySelector(`label[for="${checkbox.id}"]`);
+                obatData[checkbox.value] = {
+                    nama: label.textContent.trim(),
+                    harga: parseInt(checkbox.dataset.harga)
+                };
+            });
+
+            function formatRupiah(angka) {
+                return 'Rp ' + angka.toLocaleString('id-ID');
+            }
+
+            function updateBiaya() {
+                let totalBiayaObat = 0;
+                const obatTerpilih = [];
+
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const harga = parseInt(checkbox.dataset.harga);
+                        totalBiayaObat += harga;
+                        obatTerpilih.push({
+                            nama: obatData[checkbox.value].nama,
+                            harga: harga
+                        });
+                    }
+                });
+
+                // Update tampilan biaya
+                document.getElementById('biaya-obat').textContent = formatRupiah(totalBiayaObat);
+                document.getElementById('total-biaya').textContent = formatRupiah(biayaKonsultasi + totalBiayaObat);
+
+                // Update daftar obat terpilih
+                const listObatTerpilih = document.getElementById('list-obat-terpilih');
+
+                if (obatTerpilih.length === 0) {
+                    listObatTerpilih.innerHTML = '<li class="text-gray-500 italic">Belum ada obat yang dipilih</li>';
+                } else {
+                    listObatTerpilih.innerHTML = obatTerpilih.map(obat =>
+                        `<li>${obat.nama} - ${formatRupiah(obat.harga)}</li>`
+                    ).join('');
+                }
+            }
+
+            // Event listener untuk setiap checkbox
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
-                    // Implementasi kalkulasi biaya real-time jika diperlukan
-                    console.log('Obat dipilih:', this.value);
+                    updateBiaya();
+
+                    // Animasi visual feedback
+                    const parentDiv = this.closest('.flex');
+                    if (this.checked) {
+                        parentDiv.classList.add('bg-blue-50', 'border-blue-200');
+                        parentDiv.classList.remove('bg-gray-50');
+                    } else {
+                        parentDiv.classList.remove('bg-blue-50', 'border-blue-200');
+                        parentDiv.classList.add('bg-gray-50');
+                    }
                 });
             });
+
+            // Inisialisasi tampilan biaya saat halaman dimuat
+            updateBiaya();
         });
     </script>
+
+    <style>
+        /* Styling tambahan untuk feedback visual */
+        .obat-checkbox:checked + label {
+            color: #1e40af;
+            font-weight: 600;
+        }
+
+        /* Smooth transition untuk perubahan background */
+        .flex.items-center.justify-between {
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* Highlight untuk total biaya */
+        #total-biaya {
+            font-size: 1.1rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Animation untuk perubahan nilai */
+        @keyframes highlight {
+            0% { background-color: #fef3c7; }
+            100% { background-color: transparent; }
+        }
+
+        .biaya-update {
+            animation: highlight 0.5s ease-in-out;
+        }
+    </style>
 </x-app-layout>
