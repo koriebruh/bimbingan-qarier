@@ -15,13 +15,13 @@
                         </h2>
                         <div class="flex flex-row items-center justify-center space-x-4 text-center">
                             <!-- Tambah Obat -->
-                            <a href="{{ route('dokter.obat.create') }}"
+                            <a href="{{ route('admin.obat.create') }}"
                                class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Tambah Obat
                             </a>
 
                             <!-- Restore Obat -->
-                            <a href="{{ route('dokter.obat.recycle') }}"
+                            <a href="{{ route('admin.obat.recycle') }}"
                                class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Restore Obat
                             </a>
@@ -71,13 +71,13 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex items-center space-x-3">
                                             {{-- Button Edit --}}
-                                            <a href="{{ route('dokter.obat.edit', $obat->id) }}"
+                                            <a href="{{ route('admin.obat.edit', $obat->id) }}"
                                                class="inline-flex items-center px-3 py-1 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-600 focus:bg-yellow-600 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                                 Edit
                                             </a>
 
                                             {{-- Button Delete --}}
-                                            <form action="{{ route('dokter.obat.destroy', $obat->id) }}" method="POST" class="inline">
+                                            <form action="{{ route('admin.obat.destroy', $obat->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"

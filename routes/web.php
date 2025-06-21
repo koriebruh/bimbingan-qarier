@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\admin\DokterManagementController;
+use App\Http\Controllers\admin\PasienManagementController;
+use App\Http\Controllers\admin\PoliController;
 use App\Http\Controllers\Dokter\ChatDokterController;
+use App\Http\Controllers\Dokter\DokterController;
 use App\Http\Controllers\Dokter\MemeriksaController;
-use App\Http\Controllers\Dokter\ObatController;
-use App\Http\Controllers\Dokter\DokterController as DokterController;
+use App\Http\Controllers\Admin\ObatController;
+
 use App\Http\Controllers\Dokter\JadwalPeriksaController;
 use App\Http\Controllers\Pasien\ChatPasienController;
 use App\Http\Controllers\Pasien\JanjiPeriksaController;
@@ -25,6 +30,53 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware(['auth', 'role:admin', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboardAdmin'])->name('dashboard');
+
+    Route::prefix('dokter')->name('dokter.')->group(function () {
+        Route::get('/', [DokterManagementController::class, 'index'])->name('index');
+        Route::get('/create', [DokterManagementController::class, 'create'])->name('create');
+        Route::post('/', [DokterManagementController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [DokterManagementController::class, 'edit'])->name('edit');
+        Route::put('/{id}/edit', [DokterManagementController::class, 'update'])->name('update');
+        Route::delete('/{id}', [DokterManagementController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('pasien')->name('pasien.')->group(function () {
+        Route::get('/', [PasienManagementController::class, 'index'])->name('index');
+        Route::get('/create', [PasienManagementController::class, 'create'])->name('create');
+        Route::post('/', [PasienManagementController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [PasienManagementController::class, 'edit'])->name('edit');
+        Route::put('/{id}/edit', [PasienManagementController::class, 'update'])->name('update');
+        Route::delete('/{id}', [PasienManagementController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('poli')->name('poli.')->group(function () {
+        Route::get('/', [PoliController::class, 'index'])->name('index');
+        Route::get('/create', [PoliController::class, 'create'])->name('create');
+        Route::post('/', [PoliController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [PoliController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [PoliController::class, 'update'])->name('update');
+        Route::delete('/{id}', [PoliController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('obat')->name('obat.')->group(function () {
+        Route::get('/', [ObatController::class, 'index'])->name('index');
+        Route::get('/create', [ObatController::class, 'create'])->name('create');
+        Route::post('/', [ObatController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [ObatController::class, 'edit'])->name('edit');
+        Route::patch('/{id}', [ObatController::class, 'update'])->name('update');
+        Route::delete('/{id}', [ObatController::class, 'destroy'])->name('destroy');
+
+        Route::get('/restore', [ObatController::class, 'recycle'])->name('recycle');  //
+        Route::get('/restore/{id}', [ObatController::class, 'restore'])->name('restore'); //
+
+
+    });
+
+});
+
 
 /* DOKTER
  * */
@@ -53,19 +105,19 @@ Route::middleware(['auth', 'role:dokter', 'verified'])->prefix('dokter')->name('
      * OBAT ROUTE
      *-----------------
      * */
-    Route::prefix('obat')->name('obat.')->group(function () {
-        Route::get('/', [ObatController::class, 'index'])->name('index');
-        Route::get('/create', [ObatController::class, 'create'])->name('create');
-        Route::post('/', [ObatController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [ObatController::class, 'edit'])->name('edit');
-        Route::patch('/{id}', [ObatController::class, 'update'])->name('update');
-        Route::delete('/{id}', [ObatController::class, 'destroy'])->name('destroy');
-
-        Route::get('/restore', [ObatController::class, 'recycle'])->name('recycle');  //
-        Route::get('/restore/{id}', [ObatController::class, 'restore'])->name('restore'); //
-
-
-    });
+//    Route::prefix('obat')->name('obat.')->group(function () {
+//        Route::get('/', [ObatController::class, 'index'])->name('index');
+//        Route::get('/create', [ObatController::class, 'create'])->name('create');
+//        Route::post('/', [ObatController::class, 'store'])->name('store');
+//        Route::get('/{id}/edit', [ObatController::class, 'edit'])->name('edit');
+//        Route::patch('/{id}', [ObatController::class, 'update'])->name('update');
+//        Route::delete('/{id}', [ObatController::class, 'destroy'])->name('destroy');
+//
+//        Route::get('/restore', [ObatController::class, 'recycle'])->name('recycle');  //
+//        Route::get('/restore/{id}', [ObatController::class, 'restore'])->name('restore'); //
+//
+//
+//    });
     /* -----------------
      * MEMERIKSA PASIEN
      * -----------------
@@ -127,7 +179,6 @@ Route::middleware(['role:pasien', 'auth', 'verified'])->prefix('pasien')->name('
         Route::put('/chatDetail/update/{id}', [ChatPasienController::class, 'update'])->name('update');
         Route::delete('/chatDetail/{id}', [ChatPasienController::class, 'destroy'])->name('destroy');
     });
-
 
 });
 

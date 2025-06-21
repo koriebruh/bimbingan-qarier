@@ -88,6 +88,11 @@ class User extends Authenticatable
         return $this->role === 'pasien';
     }
 
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
 
     // GNEERATED FOORMATING NO REKAM MEDIS
     public static function generateNoRmFromId($id)
@@ -104,7 +109,7 @@ class User extends Authenticatable
         static::created(function ($user) {
             $user->no_rm = self::generateNoRmFromId($user->id);
 
-            if ($user->isDokter()) {
+            if ($user->isDokter() || $user->isAdmin()) {
                 $user->no_rm = null;
             }
 

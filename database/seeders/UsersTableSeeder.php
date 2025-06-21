@@ -119,5 +119,20 @@ class UsersTableSeeder extends Seeder
         foreach ($pasiens as $pasien) {
             User::create($pasien);
         }
+
+        $admin = [
+            [
+                'role' => 'admin',
+                'name' => 'min min admin',
+                'email' => 'superadmin@email.com',
+                'password' => Hash::make('password123'),
+                'alamat' => 'Jl. Kebon Jeruk No. 12, Jakarta Barat',
+                'no_ktp' => '3171234567890101',
+                'no_hp' => '082345678901',
+                'poli_id' => null
+            ]
+        ];
+
+        User::create($admin[0]);
     }
 }

@@ -48,6 +48,13 @@ php artisan make:controller Pasien/ChatPasienController
 
 php artisan make:controller Pasien/JanjiPeriksaController
 
+php artisan make:controller Admin/AdminController
+
+php artisan make:controller admin/UserManagementController
+php artisan make:controller admin/PasienManagementController
+
+php artisan make:controller admin/PoliController
+php artisan make:controller admin/ObatController
 
 php artisan migrate:refresh --seed
 

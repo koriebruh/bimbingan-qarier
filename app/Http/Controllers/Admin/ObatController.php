@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dokter;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Obat;
@@ -91,6 +91,4 @@ class ObatController extends Controller
         }
         return redirect()->route('admin.obat.index')->with('error', 'obat-not-found');
     }
-
-
 }

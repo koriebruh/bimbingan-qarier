@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->timestamps();
 
             // NE ADDED
-            $table->enum('role', ['dokter', 'pasien'])->default('pasien');
+            $table->enum('role', ['dokter', 'pasien', 'admin'])->default('pasien');
             $table->string('alamat');
             $table->string('no_ktp');
             $table->string('no_hp');

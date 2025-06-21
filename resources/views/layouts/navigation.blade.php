@@ -23,10 +23,10 @@
                             {{ __('Dashboard') }}
                         </x-nav-link>
 
-                        {{--      OBAT                  --}}
-                        <x-nav-link :href="route('dokter.obat.index')" :active="request()->routeIs('dokter.obat.index')">
-                            {{ __('Master Obat') }}
-                        </x-nav-link>
+{{--                        --}}{{--      OBAT                  --}}
+{{--                        <x-nav-link :href="route('dokter.obat.index')" :active="request()->routeIs('dokter.obat.index')">--}}
+{{--                            {{ __('Master Obat') }}--}}
+{{--                        </x-nav-link>--}}
 
                         {{--          JADWAL PERIKSA              --}}
                         <x-nav-link :href="route('dokter.JadwalPeriksa.index')" :active="request()->routeIs('dokter.JadwalPeriksa.index')">
@@ -68,6 +68,29 @@
                         <x-nav-link :href="route('pasien.HistoryPeriksa.index')" :active="request()->routeIs('pasien.HistoryPeriksa.index')">
                             {{ __('History Pemeriksaan') }}
                         </x-nav-link>
+
+                    @elseif(Auth::user()->role == 'admin')
+                        {{--                        --}}
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin.dokter.index')" :active="request()->routeIs('admin.dokter.dashboard')">
+                            {{ __('Dokter') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin.pasien.index')" :active="request()->routeIs('admin.pasien.dashboard')">
+                            {{ __('Pasien') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin.poli.index')" :active="request()->routeIs('admin.poli.dashboard')">
+                            {{ __('Poli') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin.obat.index')" :active="request()->routeIs('dokter.obat.index')">
+                            {{ __('Master Obat') }}
+                        </x-nav-link>
+
                     @endif
                 </div>
             </div>
